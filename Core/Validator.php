@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Validator
 {
 //  checking whether input string is empty or not

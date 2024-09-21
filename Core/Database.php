@@ -1,8 +1,12 @@
 <?php
 
+namespace Core;
+use PDO;
+
 class Database
 {
     public $connection;
+    public $statement;
 
     //  Each time we call query function for every query we would implement,
     //  then instead of starting whole loading process everytime from scratch
@@ -21,8 +25,8 @@ class Database
         ]);
     }
 
-//    Returning object below so that we can use other methods with same instance for variables.
-//    Checkout method chaining
+    //    Returning object below so that we can use other methods with same instance for variables.
+    //    Checkout method chaining
     public function query($query, $params = [])
     {
         $this->statement = $this->connection->prepare($query);

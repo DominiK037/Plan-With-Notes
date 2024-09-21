@@ -1,5 +1,7 @@
 <?php
 
+use Core\Response;
+
 function dd($value)
 {
     echo "<pre>";
@@ -21,13 +23,13 @@ function isAuthorized($condition, $status = Response::NOT_AUTHORIZED)
     }
 }
 
-function basePath($path)
+function basePath($path)    //  Function to start a path from root dir
 {
     return BASE_PATH . $path;
 }
 
-function view($path, $headerArray = [])
+function view($path, $headerArray = [])     //  function for files in views dir
 {
-    extract($headerArray);
+    extract($headerArray);      //  Converting an array key into variable which is being used in banner.php
     return basePath('views/' . $path);
 }
