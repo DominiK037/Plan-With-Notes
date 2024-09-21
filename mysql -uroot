@@ -1,0 +1,17 @@
+● mysql.service - MySQL Community Server
+     Loaded: loaded (]8;;file://rushi/usr/lib/systemd/system/mysql.service/usr/lib/systemd/system/mysql.service]8;;; [0;1;32menabled[0m; preset: [0;1;32menabled[0m)
+     Active: activating (start) since Wed 2024-09-11 23:16:34 IST; 927ms ago
+    Process: 100978 ExecStartPre=/usr/share/mysql/mysql-systemd-start pre (code=exited, status=0/SUCCESS)
+   Main PID: 100987 (mysqld)
+     Status: "[0;1;36mServer startup in progress[0m"
+      Error: 98 (Address already in use)
+      Tasks: 30 (limit: 13877)
+     Memory: 361.4M (peak: 380.2M)
+        CPU: 435ms
+     CGroup: /system.slice/mysql.service
+             └─[0;38;5;245m100987 /usr/sbin/mysqld[0m
+
+Sep 11 23:16:34 rushi systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mmysql.service: Failed with result 'exit-code'.[0m
+Sep 11 23:16:34 rushi systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start mysql.service - MySQL Community Server.[0m
+Sep 11 23:16:35 rushi systemd[1]: mysql.service: Scheduled restart job, restart counter is at 93.
+Sep 11 23:16:35 rushi systemd[1]: Starting mysql.service - MySQL Community Server...
