@@ -39,11 +39,12 @@ class Database
     {
         return $this->statement->fetchAll();
     }
-    public function find()
+
+    public function find()  //  fetch single object in an array
     {
         return $this->statement->fetch();
     }
-    public function findOrFail()
+    public function findOrFail()    //  abort if object doesn't exist in an array
     {
         $result = $this->find();
 

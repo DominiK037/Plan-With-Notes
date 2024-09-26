@@ -3,7 +3,7 @@
 use Core\App;
 use Core\Database;
 
-$db = App::container()->resolve(Database::class);       //  Database::class-> translates full namespace path to the string
+$db = App::resolve(Database::class);       //  Database::class-> translates full namespace path to the string
 
 $currentUserId = 1;
 
