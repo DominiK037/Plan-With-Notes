@@ -6,12 +6,12 @@ class Container
 {
     protected $bindings = [];       //  Saving the objects
 
-    public function bind($key, $func)      //  add() is the similar name
+    public function bind($key, $func)      //  add() object
     {
         $this->bindings[$key] = $func;      //  [$key] -> consider it an index of an array, $func -> value of that index
     }
 
-    public function resolve($key)   //  retrieve() is the similar name
+    public function resolve($key)   //  retrieve() object
     {
         if (!array_key_exists($key, $this->bindings)) {
             throw new \Exception('No matching binding found with the key-> ' . $key);
