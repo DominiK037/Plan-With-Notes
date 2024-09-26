@@ -21,6 +21,6 @@ $router = new Router();
 $routes = require basePath('routes.php');
 
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];  //  The parse_url() function is used to parse an URL string into parts, such as the scheme, host, path, query string, and fragment
-$method = isset($_POST['_method']) ? $_POST['_method'] : $_SERVER['REQUEST_METHOD'];
+$method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
 $router->route($uri, $method);

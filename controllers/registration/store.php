@@ -4,6 +4,8 @@ use Core\Database;
 use Core\Validator;
 use Core\App;
 
+$db = App::resolve(Database::class);
+
 $email = $_POST['email'];
 $password = $_POST['password'];;
 $errors = [];
@@ -23,17 +25,15 @@ if(!empty($errors)){
     ]);
 }
 
-$db = App::resolve(Database::class);
-
 //  check if the account is already existing
 $user = $db->query('select * from users where email = :email', [
     'email' => $email
 ])->find();
 
 if($user){
-    $_SESSION['user'] = [
-        'email' => $email,
-    ];
+
+    login($user);
+
     //  then someone with that email already exist and has an account
     //  If yes, redirect to a login page
     header('Location: /');
@@ -43,13 +43,11 @@ if($user){
     //  If not, save one to the database, and then log the user in and redirect
     $db->query('insert into users (email, password) values (:email, :password)', [
         'email' => $email,
-        'password' => $password
+        'password' => password_hash($password, PASSWORD_DEFAULT)
     ]);
 
     //  marking user as logged in
-    $_SESSION['user'] = [
-        'email' => $email,
-    ];
+    login($user);
 
     header('Location: /');
     exit();
