@@ -1,13 +1,13 @@
 <?php
 
-namespace http\Forms;
+namespace Http\Forms;
 use Core\Validator;
+
 class LoginForm
 {
     protected $errors = [];
-    public function validate($email, $password): bool
+    public function validate($email, $password)
     {
-        $errors = [];
         //  validate email
         if (!Validator::email($email)) {
             $this->errors['email'] = 'Please provide a valid email address';
@@ -18,8 +18,14 @@ class LoginForm
         }
         return empty($this->errors);
     }
+    public function error($field, $message)
+    {
+        $this->errors[$field] = $message;
 
-    public function getErrors(): array
+        return $this;
+    }
+
+    public function errors(): array
     {
         return $this->errors;
     }

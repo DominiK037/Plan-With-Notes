@@ -1,46 +1,19 @@
 <?php
 
-use Core\App;
-use Core\Database;
-use Core\Validator;
-use http\Forms\LoginForm;
+use Core\Authenticator;
+use Http\Forms\LoginForm;
 
-$db = App::resolve(Database::class);
+$email = $_POST["email"];
+$password = $_POST["password"];
 
-$email = $_POST['email'];
-$password = $_POST['password'];;
+$form = LoginForm::class->validate($email, $password);
 
-$form = new LoginForm();
+$signedIn = (new Authenticator)->attempt($email, $password);
 
-if(! $form->validate($email, $password)) {
-    return view('session/create.view.php',[
-       'errors' => $form->getErrors()
-    ]);
+if (!$signedIn) {
+    $form->error(
+        'email', 'No matching account found for that email address and password.'
+    )->throw();
 }
 
-
-//  check if the account already exists
-$user = $db->query('select * from users where email = :email', [
-    'email' => $email
-])->find();
-
-if($user) {
-   if(password_verify($password, $user['password'])){
-
-       //  marking user as logged in
-       login([
-           'email' => $email,
-       ]);
-
-       header("Location: /");
-       exit();
-
-   }
-}
-
-return view('session/create.view.php', [
-   'errors' => [
-       'email' => 'Please provide a valid email address',
-   ]
-]);
-
+redirect('/');

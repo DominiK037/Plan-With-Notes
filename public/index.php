@@ -1,10 +1,11 @@
 <?php
 
-session_start();
 
 use Core\Router;
 
 const BASE_PATH = __DIR__ . '/../';      //  __DIR__ -> current directory & /../ -> move one directory above in this case i.e to demo
+
+session_start();
 
 require BASE_PATH . "Core/functions.php";
 
