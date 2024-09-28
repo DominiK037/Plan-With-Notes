@@ -3,23 +3,30 @@
 use Core\Authenticator;
 use http\Forms\LoginForm;
 
-$email = $_POST['email'];
-$password = $_POST['password'];;
+$form = new LoginForm($attributes = []);
 
-$form = new LoginForm();
+$form->validate($attributes = [
+    'email' => $_POST['email'],
+    'password' => $_POST['password'],
+]);
 
-if ($form->validate($email, $password)) {
-    $auth = new Authenticator();
+$signedIn = (new Authenticator)->attempt(
+    $attributes['email'], $attributes['password']
+);
 
-    if (!$auth->attempt($email, $password)) {
-        redirect('/');
-    }
+if (!$signedIn) {
 
-    $form->displayError('email', 'Invalid email please try again');
+    $form->displayError(
+        'email',
+        'No matching email or password.'
+    )->throw();
 }
 
-return view('session/create.view.php', [
-    'errors' => $form->getErrors()
-]);
+redirect('/');
+
+
+
+
+
 
 

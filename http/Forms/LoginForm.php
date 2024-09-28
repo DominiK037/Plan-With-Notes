@@ -1,22 +1,45 @@
 <?php
 
 namespace http\Forms;
+
+use Core\ValidationException;
 use Core\Validator;
+
 class LoginForm
 {
+    public array $attributes;
     protected $errors = [];
-    public function validate($email, $password): bool
+
+    public function __construct(array $attributes)
     {
-        $errors = [];
+        $this->attributes = $attributes;
+
         //  validate email
-        if (!Validator::email($email)) {
+        if (!Validator::email($this->attributes['email'])) {
             $this->errors['email'] = 'Please provide a valid email address';
         }
         //  validate password
-        if (!Validator::minMax($password, 7, 255)) {
+        if (!Validator::minMax($this->attributes['password'])) {
             $this->errors['password'] = 'Minimum 7 characters required';
         }
-        return empty($this->errors);
+    }
+
+    public function validate($attributes)
+    {
+
+        $instance = new static($attributes);
+
+        return $instance->failed() ? $instance->throw() : $instance;
+    }
+
+    public function throw()
+    {
+        ValidationException::throw($this->getErrors(), $this->attributes);
+    }
+
+    public function failed()
+    {
+        return count($this->errors);
     }
 
     public function getErrors(): array
@@ -27,5 +50,7 @@ class LoginForm
     function displayError($field, $message)
     {
         $this->errors[$field] = $message;
+
+        return $this;
     }
 }

@@ -74,4 +74,9 @@ class Router
 
         die("I am in abort of {$code}");
     }
+
+    public function previousUrl()
+    {
+        return $_SERVER['HTTP_REFERER'];
+    }
 }

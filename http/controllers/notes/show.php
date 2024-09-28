@@ -6,10 +6,10 @@ use Core\App;
 $db = App::resolve(Database::class);
 
 $id = $_GET['id'];
-$currentUserId = 1;
+$currentUserId = 11;
 
-$note = $db->query('SELECT * FROM notes where id = :id', [
-    'id' => $_GET['id']
+$note = $db->query('SELECT * FROM notes where user_id = :user_id', [
+    'user_id' => $_GET['user_id']
 ])->find();
 
 isAuthorized($note['user_id'] === $currentUserId);

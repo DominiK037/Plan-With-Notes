@@ -1,0 +1,20 @@
+{
+    "name": "rushi/plan-with-notes",
+    "require": {
+        "illuminate/collections": "^11.25"
+    },
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "Http\\": "Http/"
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
