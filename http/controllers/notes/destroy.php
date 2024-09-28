@@ -5,7 +5,7 @@ use Core\Database;
 
 $db = App::resolve(Database::class);       //  Database::class-> translates full namespace path to the string
 
-$currentUserId = 1;
+$currentUserId = 11;
 
 $note = $db->query('SELECT * FROM notes where id = :id', [
     'id' => $_POST['id']

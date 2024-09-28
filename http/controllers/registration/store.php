@@ -3,6 +3,7 @@
 use Core\Database;
 use Core\Validator;
 use Core\App;
+use Core\Authenticator;
 
 $db = App::resolve(Database::class);
 
@@ -32,7 +33,7 @@ $user = $db->query('select * from users where email = :email', [
 
 if($user){
 
-    login($user);
+    App::resolve(Authenticator::class)->login($user);
 
     //  then someone with that email already exist and has an account
     //  If yes, redirect to a login page
@@ -47,7 +48,7 @@ if($user){
     ]);
 
     //  marking user as logged in
-    login($user);
+    App::resolve(Authenticator::class)->login($user);
 
     header('Location: /');
     exit();
