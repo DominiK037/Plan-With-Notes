@@ -11,7 +11,7 @@
     - Composer
     - Refactoring techniques
     - Router->Controllers->Views
-    - Used free tailwind Html & css templates which saved alot of time for designing a new tamplates.
+    - Used free tailwind HTML & CSS templates which saved alot of time for designing a new tamplates.
 
 - Above topics helped me building imaginary mapping while building an web application while following good conventions as well as code refactoring.
 
